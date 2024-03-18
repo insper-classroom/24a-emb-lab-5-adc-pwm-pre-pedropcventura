@@ -25,14 +25,28 @@ void data_task(void *p) {
 
 void process_task(void *p) {
     int data = 0;
-
+    int lst[5] = {0,0,0,0,0};
+    int contador = 0;
+    int media_movel;
+    int dalhe = 0;
     while (true) {
         if (xQueueReceive(xQueueData, &data, 100)) {
             // implementar filtro aqui!
+            lst[contador] = data;
 
+            contador+=1;
 
+            if (contador == 5){
+                contador = 0;
+                
+            }
+            
+            media_movel = (lst[0]+lst[1]+lst[2]+lst[3]+lst[4])/5;
+            printf("MEDIA MOVEL: %d\n", media_movel);
+                    
 
-
+            
+            
             // deixar esse delay!
             vTaskDelay(pdMS_TO_TICKS(50));
         }
